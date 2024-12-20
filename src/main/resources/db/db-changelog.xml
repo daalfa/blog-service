@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="1" author="Davi Fagundes">
+        <createTable tableName="post">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(255)"/>
+            <column name="content" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="comment">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="message" type="varchar(255)"/>
+            <column name="post_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="post_id"
+                                 baseTableName="comment"
+                                 constraintName="fk_comment_post"
+                                 referencedColumnNames="id"
+                                 referencedTableName="post"/>
+    </changeSet>
+
+</databaseChangeLog>

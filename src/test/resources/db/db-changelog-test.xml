@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <include file="db/db-changelog.xml"/>
+
+    <changeSet id="2" author="Davi Fagundes">
+        <insert tableName="post">
+            <column name="title" value="My Title"/>
+            <column name="content" value="My Content"/>
+        </insert>
+        <insert tableName="comment">
+            <column name="message" value="My Reply"/>
+            <column name="post_id" valueComputed="(SELECT id FROM post WHERE title = 'My Title')"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
